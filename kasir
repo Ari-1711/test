@@ -1,0 +1,103 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+  const int MAX_BARANG = 10;     // Maksimal jumlah barang
+  string namaBarang[MAX_BARANG]; // Array untuk nama barang
+  int hargaBarang[MAX_BARANG];   // Array untuk harga barang
+  int jumlahBarang[MAX_BARANG];  // Array untuk jumlah barang
+  int jumlahTotalBarang;         // Total jumlah barang
+  int subTotal = 0;
+  int finalHarga = 0; // Total harga
+  int jumlahBayar;    // Jumlah yang dibayar
+
+  cout << "----- Selamat Datang di Mini Market Mercu Buana -----" << endl;
+  cout << endl;
+
+  cout << "Masukkan jumlah barang yang ingin dibeli: ";
+  cin >> jumlahTotalBarang;
+  cout << endl;
+
+  if (jumlahTotalBarang <= 0)
+  {
+    cout << "Input Invalid" << endl;
+    return 0;
+  }
+
+  cout << endl;
+
+  for (int i = 0; i < jumlahTotalBarang; i++)
+  {
+    cout << "Barang ke-" << i + 1 << endl;
+    cout << "Nama barang  : ";
+    getline(cin >> ws, namaBarang[i]);
+    cout << "Harga satuan : ";
+    cin >> hargaBarang[i];
+    cout << "Jumlah " << namaBarang[i] << " yang dibeli: ";
+    cin >> jumlahBarang[i];
+    cout << endl;
+  }
+  cout << endl;
+
+  cout << "-----------------------------------------------------------------" << endl;
+  cout << "|         STRUK BELANJA MINI MARKET MERCU BUANA          |" << endl;
+  cout << "-----------------------------------------------------------------" << endl;
+  cout << "NO   Nama Barang    Jumlah Barang    Harga Barang     Sub Total" << endl;
+  for (int i = 0; i < jumlahTotalBarang; i++)
+  {
+    cout << setw(1) << i + 1 << " ";
+    cout << left << setw(12) << namaBarang[i];
+    cout << right << setw(8) << jumlahBarang[i];
+    cout << setw(15) << hargaBarang[i];
+    cout << setw(18) << jumlahBarang[i] * hargaBarang[i];
+    cout << endl;
+    subTotal = subTotal + (jumlahBarang[i] * hargaBarang[i]);
+  }
+  cout << "-----------------------------------------------------------------" << endl;
+
+  if (subTotal > 100000)
+  {
+    int disc = subTotal * 0.2;
+    int finalHarga = subTotal - disc;
+
+    cout << "Extra potongan 20'%' minimal pembelian Rp 100000 : " << finalHarga << endl;
+
+    cout << "Total Pembayaran : Rp ";
+    cin >> jumlahBayar;
+    cout << endl;
+
+    if (jumlahBayar - finalHarga < 0)
+    {
+      cout << "Maaf, uang anda kurang. Mohon lakukan ulang pembayaran" << endl;
+      cout << "Total Pembayaran : Rp ";
+      cin >> jumlahBayar;
+      cout << endl;
+    }
+    cout << "Kembalian Anda : Rp " << jumlahBayar - finalHarga << endl;
+  }
+  else
+  {
+    cout << "Total Bayar : " << subTotal << endl;
+    cout << "Total Pembayaran : Rp ";
+    cin >> jumlahBayar;
+    cout << endl;
+
+    if (jumlahBayar - subTotal < 0)
+    {
+      cout << "Maaf, uang anda kurang. Mohon lakukan ulang pembayaran" << endl;
+      cout << "Total Pembayaran : Rp ";
+      cin >> jumlahBayar;
+      cout << endl;
+    }
+    cout << "Kembalian Anda : Rp " << jumlahBayar - subTotal << endl;
+  }
+
+  cout << endl;
+  cout << "----------------------------------------------------------" << endl;
+  cout << "|                     TERIMA KASIH                       |" << endl;
+  cout << "----------------------------------------------------------" << endl;
+
+  return 0;
+}
